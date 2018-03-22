@@ -135,12 +135,6 @@ class NEB:
             image.set_positions(positions[n1:n2])
             n1 = n2
 
-            # Parallel NEB with Jacapo needs this:
-            try:
-                image.get_calculator().set_atoms(image)
-            except AttributeError:
-                pass
-
     def get_forces(self):
         """Evaluate and return the forces."""
         images = self.images
@@ -310,7 +304,7 @@ class NEB:
         # virtual atom count for the optimization algorithm.
         return (self.nimages - 2) * self.natoms
 
-    def _images_(self):
+    def iterimages(self):
         # Allows trajectory to convert NEB into several images
         assert not self.parallel or self.world.size == 1
         # (We could collect the atoms objects on master here!)
@@ -456,8 +450,9 @@ class SingleCalculatorNEB(NEB):
                     self.images[i].set_calculator(
                         SinglePointCalculator(
                             image,
-                            energy=image.get_potential_energy(),
-                            forces=image.get_forces()))
+                            energy=image.get_potential_energy(
+                                apply_constraint=False),
+                            forces=image.get_forces(apply_constraint=False)))
                 self.emax = min(self.emax, image.get_potential_energy())
 
         if self.first:
@@ -631,12 +626,6 @@ def interpolate(images, mic=False):
     d /= (len(images) - 1.0)
     for i in range(1, len(images) - 1):
         images[i].set_positions(pos1 + i * d)
-        # Parallel NEB with Jacapo needs this:
-        try:
-            images[i].get_calculator().set_atoms(images[i])
-        except AttributeError:
-            pass
-
 
 if __name__ == '__main__':
     # This stuff is used by ASE's GUI
