@@ -13,6 +13,14 @@ Git master branch
 * No changes yet
 
 
+Version 3.16.1
+==============
+
+4 June 2018: :git:`3.16.1 <../3.16.1>`
+
+* No changes yet
+
+
 Version 3.16.0
 ==============
 
