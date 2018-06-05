@@ -5,20 +5,12 @@ Release notes
 =============
 
 
-Git master branch
-=================
-
-:git:`master <>`.
-
-* No changes yet
-
-
-Version 3.16.1
+Version 3.16.2
 ==============
 
-4 June 2018: :git:`3.16.1 <../3.16.1>`
+4 June 2018: :git:`3.16.2 <../3.16.2>`
 
-* No changes yet
+* Fix test failure for newer versions of flask due to error within the test itself.  Fix trajectory format on bigendian architectures.  Fix issue with trajectory files opened in append mode where header would not be written correctly for images with different length, atomic species, boundary conditions, or constraints.
 
 
 Version 3.16.0
