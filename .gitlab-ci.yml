@@ -18,9 +18,9 @@ variables:
 # one test with minimal dependencies and another
 # testing oldest supported versions of those libraries.
 python_3_oldlibs_tests:
-  image: python:3-slim
+  image: python:3.4-slim
   script:
-    - pip install numpy
-    - pip install scipy==1.0.1
+    - pip install numpy==1.9
+    - pip install scipy==0.13.3
     - pip install --no-deps .
     - ase info
