@@ -21,6 +21,6 @@ python_3_oldlibs_tests:
   image: python:3-slim
   script:
     - pip install numpy
-    - pip install scipy
+    - pip install scipy==1.0.1
     - pip install --no-deps .
-    - ase test
+    - ase info
